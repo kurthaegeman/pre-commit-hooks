@@ -40,6 +40,12 @@
     language: python
     types: [text, executable]
     stages: [commit, push, manual]
+-   id: check-file-age
+    name: check if file is older than certain threshold
+    description: ensures that designated files are regularly updated.
+    entry: check-file-age
+    language: python
+    stages: [commit, push, manual]
 -   id: check-json
     name: check json
     description: checks json files for parseable syntax.
