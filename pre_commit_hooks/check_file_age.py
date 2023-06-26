@@ -1,12 +1,13 @@
 import argparse
+import os
 from typing import Sequence
 
 
-def check_file_age(filenames: Sequence[str], maxage: int) -> int:
-    retv = 0
+def check_file_age(file: str, maxage: int) -> int:
+    retv = 1
 
-    print(filenames)
-    print(maxage)
+    age = os.path.getmtime(file)
+    print(file, age, maxage)
 
     return retv
 
@@ -18,13 +19,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         help='Filenames pre-commit believes are changed.',
     )
     parser.add_argument(
+        '--file', type=str, default="",
+        help='File to check',
+    )
+    parser.add_argument(
         '--maxage', type=int, default=500,
         help='Maximum allowable seconds age',
     )
     args = parser.parse_args(argv)
 
     return check_file_age(
-        args.filenames,
+        args.file,
         args.maxage,
     )
 
