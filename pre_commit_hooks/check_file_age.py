@@ -1,5 +1,6 @@
 import argparse
 import os
+import time
 from typing import Sequence
 
 
@@ -7,9 +8,11 @@ def check_file_age(file: str, maxage: int) -> int:
     retv = 1
 
     age = os.path.getmtime(file)
-    print(file, age, maxage)
+    now = time.time()
 
-    return retv
+    print(file, age, maxage, now, age + maxage)
+
+    return age + maxage < now
 
 
 def main(argv: Sequence[str] | None = None) -> int:
